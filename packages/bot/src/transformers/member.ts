@@ -1,8 +1,8 @@
 import type { BigString, DiscordMember } from '@discordeno/types'
 import { iconHashToBigInt } from '@discordeno/utils'
 import type { Bot } from '../bot.js'
-import { MemberToggles } from './toggles/member.js'
 import { Permissions } from './toggles/Permissions.js'
+import { MemberToggles } from './toggles/member.js'
 import type { User } from './user.js'
 
 const baseMember: Partial<Member> & BaseMember = {

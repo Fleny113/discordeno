@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Buffer } from 'node:buffer'
 
-import { calculateBits, camelize, camelToSnakeCase, delay, getBotIdFromToken, logger, processReactionString, urlToBase64 } from '@discordeno/utils'
+import { calculateBits, camelToSnakeCase, camelize, delay, getBotIdFromToken, logger, processReactionString, urlToBase64 } from '@discordeno/utils'
 
 import { createInvalidRequestBucket } from './invalidBucket.js'
 import { Queue } from './queue.js'
 
 import {
-  InteractionResponseTypes,
   type BigString,
   type Camelize,
   type DiscordAccessTokenResponse,
@@ -24,6 +23,7 @@ import {
   type DiscordEmoji,
   type DiscordEntitlement,
   type DiscordFollowedChannel,
+  type DiscordGetAnswerVotesResponse,
   type DiscordGetGatewayBot,
   type DiscordGuild,
   type DiscordGuildApplicationCommandPermissions,
@@ -40,7 +40,6 @@ import {
   type DiscordMemberWithUser,
   type DiscordMessage,
   type DiscordPartialGuild,
-  type DiscordGetAnswerVotesResponse,
   type DiscordPrunedCount,
   type DiscordRole,
   type DiscordScheduledEvent,
@@ -55,6 +54,7 @@ import {
   type DiscordVoiceRegion,
   type DiscordWebhook,
   type DiscordWelcomeScreen,
+  InteractionResponseTypes,
   type MfaLevels,
   type ModifyGuildTemplate,
 } from '@discordeno/types'

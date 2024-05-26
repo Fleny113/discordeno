@@ -1,6 +1,6 @@
 import type { DiscordUser, PremiumTypes } from '@discordeno/types'
 import { iconHashToBigInt } from '@discordeno/utils'
-import { ToggleBitfield, UserToggles, type Bot } from '../index.js'
+import { type Bot, ToggleBitfield, UserToggles } from '../index.js'
 
 const baseUser: Partial<User> & BaseUser = {
   get tag() {

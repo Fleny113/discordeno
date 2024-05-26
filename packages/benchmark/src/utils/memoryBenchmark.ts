@@ -9,7 +9,11 @@ export async function memoryBenchmark<O, E>(
     table: false,
   },
 ): Promise<void> {
-  const garbageCollect = global.gc ?? (() => {})
+  const garbageCollect =
+    global.gc ??
+    (() => {
+      /* Just an empty function */
+    })
 
   const stages = ['start', 'loaded', 'end', 'cached'] as const
   const typesOfMemUsages = ['rss', 'heapUsed', 'heapTotal'] as const
@@ -82,7 +86,7 @@ export async function memoryBenchmark<O, E>(
     },
   }
 
-  const BYTES = 1000000
+  const bytes = 1000000
 
   for (let index = 0; index < options.times; index++) {
     if (options.log) console.log('running the', index + 1, 'time')
@@ -115,10 +119,10 @@ export async function memoryBenchmark<O, E>(
       preprocessedResults[tableRow]![tableField] = {
         value:
           Math.round(
-            (allResults[stages[index]][typesOfMemUsages[index2]].reduce((acc, c) => acc + c, 0) / allResults.start.rss.length / BYTES) * 100,
+            (allResults[stages[index]][typesOfMemUsages[index2]].reduce((acc, c) => acc + c, 0) / allResults.start.rss.length / bytes) * 100,
           ) / 100,
-        min: Math.round((Math.min(...allResults[stages[index]][typesOfMemUsages[index2]]) / BYTES) * 100) / 100,
-        max: Math.round((Math.max(...allResults[stages[index]][typesOfMemUsages[index2]]) / BYTES) * 100) / 100,
+        min: Math.round((Math.min(...allResults[stages[index]][typesOfMemUsages[index2]]) / bytes) * 100) / 100,
+        max: Math.round((Math.max(...allResults[stages[index]][typesOfMemUsages[index2]]) / bytes) * 100) / 100,
       }
     }
   }

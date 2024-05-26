@@ -1,8 +1,8 @@
+import { inflateSync } from 'node:zlib'
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 import type { DiscordGatewayPayload, DiscordHello, DiscordReady } from '@discordeno/types'
 import { GatewayCloseEventCodes, GatewayOpcodes } from '@discordeno/types'
 import { LeakyBucket, camelize, delay, logger } from '@discordeno/utils'
-import { inflateSync } from 'node:zlib'
 import NodeWebSocket from 'ws'
 import type { BotStatusUpdate, ShardEvents, ShardGatewayConfig, ShardHeart, ShardSocketRequest } from './types.js'
 import { ShardSocketCloseCodes, ShardState } from './types.js'

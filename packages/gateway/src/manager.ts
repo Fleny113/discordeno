@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 import {
-  GatewayIntents,
-  GatewayOpcodes,
   type AtLeastOne,
   type BigString,
   type Camelize,
   type DiscordGetGatewayBot,
   type DiscordMemberWithUser,
+  GatewayIntents,
+  GatewayOpcodes,
   type RequestGuildMembers,
 } from '@discordeno/types'
 import { Collection, delay, logger } from '@discordeno/utils'
@@ -216,7 +216,7 @@ export function createGatewayManager(options: CreateGatewayManagerOptions): Gate
       this.shards.delete(shardId)
       await shard.shutdown()
     },
-    async requestIdentify(shardId: number) {
+    async requestIdentify(_shardId: number) {
       gateway.logger.debug(`[Gateway] requesting identify`)
       // const bucket = gateway.buckets.get(shardId % gateway.connection.sessionStartLimit.maxConcurrency)
       // if (!bucket) return

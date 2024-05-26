@@ -111,6 +111,7 @@ export class LeakyBucket implements LeakyBucketOptions {
       else this.queue.push(resolve)
 
       // Each request should trigger the queue to be processed.
+      // biome-ignore lint/complexity/noVoid: This is required for the correct functionality of the bucket
       void this.processQueue()
     })
   }

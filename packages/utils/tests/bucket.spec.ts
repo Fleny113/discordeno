@@ -157,7 +157,9 @@ describe('bucket.ts', () => {
       const acquired2 = bucket.acquire()
 
       // js event loop
-      await (async () => {})()
+      await (async () => {
+        /* This is allow the js event loop to process some other stuff and then come back to us */
+      })()
 
       expect(await promiseState(acquired1)).to.equal('fulfilled')
       expect(await promiseState(acquired2)).to.equal('pending')

@@ -1,6 +1,8 @@
 import {
   ApplicationFlags,
+  type Bot,
   ButtonStyles,
+  type DiscordMessage,
   InteractionTypes,
   MemberToggles,
   MessageActivityTypes,
@@ -13,8 +15,6 @@ import {
   UserFlags,
   createBot,
   iconHashToBigInt,
-  type Bot,
-  type DiscordMessage,
 } from '@discordeno/bot'
 import { memoryBenchmark } from '../utils/memoryBenchmark.js'
 
@@ -99,7 +99,7 @@ await memoryBenchmark(
   (object, event: DiscordMessage) => object.cache.push(bot.transformers.message(bot, event)),
   // function specify how to add event to the object/ run the object
   [...new Array(MESSAGE_SIZE)].map(
-    (i) =>
+    () =>
       ({
         activity: {
           party_id: 'party_id',
@@ -483,7 +483,7 @@ await memoryBenchmark(
   (object, event: DiscordMessage) => object.cache.push(oldtransformMessage(bot, event)),
   // function specify how to add event to the object/ run the object
   [...new Array(MESSAGE_SIZE)].map(
-    (i) =>
+    () =>
       ({
         activity: {
           party_id: 'party_id',

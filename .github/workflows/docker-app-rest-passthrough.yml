@@ -28,8 +28,8 @@ jobs:
   #         git config user.email github-actions@github.com
   #     - name: Run release script
   #       run: |
-  #         yarn install --immutable
-  #         yarn release
+  #         pnpm install
+  #         pnpm release
   #         git push && git push --tags
 
   app-version:
@@ -173,7 +173,7 @@ jobs:
           context: docker-apps/rest-passthrough
           push: false
           tags: 'discordeno/app-rest-passthrough:latest, discordeno/app-rest-passthrough:v${{ needs.app-version.outputs.version }}'
-          # linux/s390x stuck at yarn install, remove it for now
+          # linux/s390x stuck at install, remove it for now
           platforms: linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8,linux/ppc64le
           target: runner
           cache-from: type=local,src=/tmp/.buildx-cache
@@ -214,6 +214,6 @@ jobs:
           context: docker-apps/rest-passthrough
           push: true
           tags: 'ghcr.io/discordeno/app-rest-passthrough:latest, ghcr.io/discordeno/app-rest-passthrough:v${{ needs.app-version.outputs.version }}'
-          # linux/s390x stuck at yarn install, remove it for now
+          # linux/s390x stuck at install, remove it for now
           platforms: linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8,linux/ppc64le
           target: runner

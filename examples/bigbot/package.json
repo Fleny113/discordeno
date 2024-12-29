@@ -6,7 +6,7 @@
   "type": "module",
   "license": "ISC",
   "private": true,
-  "packageManager": "yarn@4.0.2",
+  "packageManager": "pnpm@9.15.2",
   "scripts": {
     "start:bot": "node dist/bot/index.js",
     "start:rest": "node dist/rest/index.js",

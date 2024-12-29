@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build:type": "tsc --declaration --emitDeclarationOnly --declarationDir dist/types",
-    "release-build": "yarn build && yarn build:type",
+    "release-build": "pnpm build && pnpm build:type",
     "fmt": "biome format --write",
     "lint": "biome lint --write",
     "build": "swc src --strip-leading-paths --delete-dir-on-start --out-dir dist && node ../../scripts/fixBenchExtension.js",

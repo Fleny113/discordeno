@@ -13,22 +13,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
       - uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: pnpm
       - uses: denoland/setup-deno@main
         with:
           deno-version: 'v1.29'
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v4
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - run: yarn install --immutable
+      - run: pnpm install
       - name: Turbo Cache
         id: turbo-cache
         uses: actions/cache@v4
@@ -53,32 +49,28 @@ jobs:
           path: |
             ~/.deno
             ~/.cache/deno
-          key: ${{ runner.os }}-deno-${{ inputs.package }}-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-deno-${{ inputs.package }}-${{ hashFiles('**/pnpm-lock.lock') }}
           restore-keys: |
             ${{ runner.os }}-deno-${{ inputs.package }}
       - name: Deno Unit Test
-        run: yarn test:deno-unit --cache-dir=".turbo" --filter=./packages/${{ inputs.package }}
+        run: pnpm test:deno-unit --cache-dir=".turbo" --filter=./packages/${{ inputs.package }}
   bun-unit-test:
     name: Bun Unit Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: '1.0.6'
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - run: yarn install --immutable
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: pnpm
+      - run: pnpm install
       - name: Turbo Cache
         id: turbo-cache
         uses: actions/cache@v4
@@ -98,5 +90,5 @@ jobs:
           path: .turbo
           key: ${{ runner.os }}-turbo-build:type-${{ github.sha }}
       - name: Bun Unit Test
-        run: yarn test:bun-unit --cache-dir=".turbo" --filter=./packages/${{ inputs.package }}
+        run: pnpm test:bun-unit --cache-dir=".turbo" --filter=./packages/${{ inputs.package }}
         timeout-minutes: 1

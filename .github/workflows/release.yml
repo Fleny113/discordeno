@@ -24,29 +24,25 @@ jobs:
         package: ['gateway', 'rest', 'types', 'utils', 'bot', 'discordeno']
     steps:
       - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
       - uses: actions/setup-node@v4
         with:
           node-version: 18
           registry-url: 'https://registry.npmjs.org'
           scope: '@discordeno'
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v4
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - run: yarn install --immutable
+          cache: pnpm
+      - run: pnpm install
       - name: build Package
-        run: yarn release-build --filter=./packages/${{ matrix.package }}
+        run: pnpm release-build --filter=./packages/${{ matrix.package }}
       - name: Bump Package Version
         if: ${{ github.event_name != 'release' && github.event.action != 'published' }}
         run: node ./scripts/bumpVersionByCommit.js ${{ matrix.package }}
 
       # If the action is running from a release use the latest tag, otherwise use the next tag
-      - run: npm publish --tag ${{ github.event_name == 'release' && github.event.action == 'published' && 'latest' || 'next' }} --access public --provenance
+      - run: pnpm publish --tag ${{ github.event_name == 'release' && github.event.action == 'published' && 'latest' || 'next' }} --access public --provenance
         working-directory: packages/${{ matrix.package }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

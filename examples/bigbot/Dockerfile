@@ -9,21 +9,18 @@ FROM node:${NODE_VERSION}-alpine as base
 # Set working directory for all build stages.
 WORKDIR /usr/src/app
 
-# Enable corepack so it can install the needed yarn version
+# Enable corepack so it can install the needed pnpm version
 RUN corepack enable
 
-COPY package.json .
-COPY yarn.lock .
-# We need to copy the yarnrc or else yarn will attempt to use PnP
-COPY .yarnrc.yml .
+COPY package.json pnpm-lock.yaml .
 
-RUN yarn install
+RUN pnpm install
 
 # Copy the rest of the source files into the image.
 COPY . .
 
 # Run the build script.
-RUN yarn build
+RUN pnpm build
 
 # Use production node environment by default.
 ENV NODE_ENV production

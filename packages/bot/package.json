@@ -17,7 +17,7 @@
   "scripts": {
     "build": "swc src --strip-leading-paths --delete-dir-on-start src --out-dir dist/esm && swc --strip-leading-paths --delete-dir-on-start src --out-dir dist/cjs -C module.type=commonjs && node ../../scripts/fixCjsExtension.js",
     "build:type": "tsc --declaration --emitDeclarationOnly --declarationDir dist/types",
-    "release-build": "yarn build && yarn build:type",
+    "release-build": "pnpm build && pnpm build:type",
     "fmt": "biome format --write",
     "lint": "biome lint --write",
     "test:unit-coverage": "c8 mocha --no-warnings 'tests/unit/**/*.spec.ts'",

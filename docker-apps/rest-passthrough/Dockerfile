@@ -12,10 +12,9 @@
 FROM --platform=$BUILDPLATFORM node:18.20.4-alpine3.20 AS deps
 WORKDIR /app
 # copy necessary for install dependencies
-COPY package.json yarn.lock .yarnrc.yml ./
-COPY ./.yarn/releases  ./.yarn/releases
+COPY package.json pnpm-lockfile.yaml ./
 # install dependencies
-RUN yarn install --immutable
+RUN pnpm install --immutable
 
 # build only with the platform of the host machine, since we just need its files
 FROM --platform=$BUILDPLATFORM node:18.20.4-alpine3.20 AS builder
@@ -27,19 +26,18 @@ COPY src/ src/
 # copy the compiler config
 COPY .swcrc ./
 # compile the files
-RUN yarn build
+RUN pnpm build
 
 FROM node:18.20.4-alpine3.20 AS runner
 # copy the compiled files from the builder image
 COPY --from=builder /app/dist /app/dist
 # copy the dependencies from the deps image
 COPY --from=deps /app/node_modules /app/node_modules
-COPY --from=deps /app/.yarn /app/.yarn
 WORKDIR /app
 # copy necessary files
-COPY package.json yarn.lock .yarnrc.yml ./
+COPY package.json pnpm-lockfile.yaml ./
 ENV HOST=0.0.0.0
 # open port 8000
 EXPOSE 8000
 # set default command
-CMD ["yarn" ,"start:prod"]
+CMD ["pnpm" ,"start:prod"]

@@ -5,7 +5,7 @@
   "type": "module",
   "license": "ISC",
   "private": true,
-  "packageManager": "yarn@4.0.2",
+  "packageManager": "pnpm@9.15.2",
   "scripts": {
     "start": "node dist/index.js",
     "build": "swc src --strip-leading-paths --delete-dir-on-start --out-dir dist",

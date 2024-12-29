@@ -105,28 +105,26 @@ Discordeno follows [semantic versioning](https://semver.org/)
 
 ## Contributing/Developing
 
-We use yarn as package manager and workspace manager, and turborepo as monorepo manager.
+We use pnpm as package manager and workspace manager, and turborepo as monorepo manager.
 
 To config the workspace run
 
 ```sh
-# if you don't have yarn installed
-npm install -g yarn
-
-yarn install
+# If you don't have pnpm installed see https://pnpm.io/installation
+pnpm install
 ```
 
 Then you can build all the files and types across all packages using
 (unless specified all commands below are run at root directory)
 
 ```sh
-yarn release-build
+pnpm release-build
 ```
 
 You can run unit tests on all packages using
 
 ```sh
-yarn test:unit
+pnpm test:unit
 ```
 
 Other useful information are available on the [website under the contributing documentation](https://discordeno.js.org/docs/contributing)
@@ -136,32 +134,32 @@ Other useful scripts
 
 ```sh
 # check style
-yarn lint
+pnpm lint
 
 # format code
-yarn fmt
+pnpm fmt
 
 # check type
-yarn test:type
+pnpm test:type
 
 # check type for tests
-yarn test:test-type
+pnpm test:test-type
 
 # unit test showing coverage
-yarn test:unit-coverage
+pnpm test:unit-coverage
 
 # unit test with Deno
-yarn test:deno-unit
+pnpm test:deno-unit
 
 # unit test with Bun
-yarn test:bun-unit
+pnpm test:bun-unit
 
 # integration test
-yarn test:integration
+pnpm test:integration
 
 # e2e test
-yarn test:e2e
+pnpm test:e2e
 
 # build doc for website
-yarn build:doc
+pnpm build:doc
 ```

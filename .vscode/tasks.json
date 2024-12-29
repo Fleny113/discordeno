@@ -4,7 +4,7 @@
     {
       "label": "Watch and Build",
       "type": "shell",
-      "command": "yarn",
+      "command": "pnpm",
       "args": ["run", "build:watch"],
       "isBackground": true,
       "presentation": {

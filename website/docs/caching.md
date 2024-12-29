@@ -20,7 +20,7 @@ Now you can do it manually by yourself or use the cache proxy package that alrea
 Install the package `dd-cache-proxy` from npm with your preferred package manager:
 
 ```bash
-yarn add dd-cache-proxy
+npm install dd-cache-proxy
 ```
 
 ### Example Usage

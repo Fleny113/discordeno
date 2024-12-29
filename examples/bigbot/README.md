@@ -73,15 +73,15 @@ The preset value of `EVENT_HANDLER_HOST`, `REST_HOST`, and `GATEWAY_HOST` all us
 
 #### Setup process
 
-- Install the dependencies with yarn
-- Build the code with `yarn build`
+- Install the dependencies with pnpm
+- Build the code with `pnpm build`
 
 You can start different parts of your bot in the following order.
 
-- Start the REST Proxy: `yarn start:rest`
+- Start the REST Proxy: `pnpm start:rest`
 - Deploy the commands: `node dist/bot/register-commands.js`
-- Start the Bot: `yarn start:bot`
-- Start Gateway: `yarn start:gateway`
+- Start the Bot: `pnpm start:bot`
+- Start Gateway: `pnpm start:gateway`
 
 #### InfluxDB
 
